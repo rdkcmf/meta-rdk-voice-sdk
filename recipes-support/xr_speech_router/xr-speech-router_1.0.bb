@@ -35,12 +35,18 @@ LDFLAGS=" -lc -lbsd  -lpthread -lxraudio -lxr_mq -lxr-timer -lxrpSMEngine"
 # Set to "1" in recipe append to enable/disable HTTP or WS support
 ENABLE_HTTP_SUPPORT ?= "1"
 ENABLE_WS_SUPPORT   ?= "1"
+ENABLE_SDT_SUPPORT   ?= "0"
+
 
 DEPENDS_append      = "${@ ' curl'               if (d.getVar('ENABLE_HTTP_SUPPORT', expand=False) == "1") else ''}"
 EXTRA_OECONF_append = "${@ ' --enable-xrsr_http' if (d.getVar('ENABLE_HTTP_SUPPORT', expand=False) == "1") else ''}"
 
 DEPENDS_append      = "${@ ' nopoll'             if (d.getVar('ENABLE_WS_SUPPORT',   expand=False) == "1") else ''}"
 EXTRA_OECONF_append = "${@ ' --enable-xrsr_ws'   if (d.getVar('ENABLE_WS_SUPPORT',   expand=False) == "1") else ''}"
+
+
+EXTRA_OECONF_append = "${@ ' --enable-xrsr_sdt' if (d.getVar('ENABLE_SDT_SUPPORT', expand=False) == "1") else ''}"
+
 
 XRSR_CONFIG_XRAUDIO = "${PKG_CONFIG_SYSROOT_DIR}/usr/include/xraudio_config.json"
 XRSR_CONFIG_OEM_ADD = "${S}/../xrsr_config_oem.add.json"
