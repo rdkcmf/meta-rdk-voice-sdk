@@ -1,0 +1,6 @@
+
+VSDK_UTILS_BASE_DIR       := "${@os.path.abspath('${TOPDIR}/../meta-rdk-voice-sdk/scripts')}"
+VSDK_UTILS_JSON_TO_HEADER := "${VSDK_UTILS_BASE_DIR}/json_to_header.py"
+VSDK_UTILS_JSON_COMBINE   := "${VSDK_UTILS_BASE_DIR}/json_combine.py"
+
+EXTRA_OECONF_append = " VSDK_UTILS_JSON_TO_HEADER=${VSDK_UTILS_JSON_TO_HEADER} VSDK_UTILS_JSON_COMBINE=${VSDK_UTILS_JSON_COMBINE}"
