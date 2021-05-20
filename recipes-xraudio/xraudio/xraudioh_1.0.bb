@@ -43,3 +43,5 @@ do_install() {
    install -m 644 ${S}/src/xraudio_platform.h       ${D}${includedir}
    install -m 644 ${S}/src/xraudio_version.h        ${D}${includedir}
 }
+
+ALLOW_EMPTY_${PN} = "1"
