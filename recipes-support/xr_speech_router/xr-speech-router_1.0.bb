@@ -30,7 +30,7 @@ CFLAGS_append = " -std=c11 -fPIC -D_REENTRANT -D_POSIX_C_SOURCE=200809L -D_GNU_S
 
 CFLAGS_append = " ${@'-DXRAUDIO_RESOURCE_MGMT' if (d.getVar('XRAUDIO_RESOURCE_MGMT', expand=False) == '1') else ''}"
 
-LDFLAGS=" -lc -lbsd  -lpthread -lxraudio -lxr_mq -lxr-timer -lxrpSMEngine"
+LDFLAGS=" -lc -lbsd  -lpthread -lxraudio -lxr_mq -lxr-timer -lxrpSMEngine -lanl"
 
 # Set to "1" in recipe append to enable/disable HTTP or WS support
 ENABLE_HTTP_SUPPORT ?= "1"
