@@ -10,7 +10,7 @@ DEPENDS = "rdkx-logger"
 
 SRCREV_xr-timestamp = "${AUTOREV}"
 
-SRC_URI = "${RDK_GENERIC_ROOT_GIT}/xr-timestamp/generic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH};name=xr-timestamp"
+SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/xr-timestamp;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=xr-timestamp"
 
 S = "${WORKDIR}/git"
 
@@ -20,10 +20,10 @@ XLOG_MODULE_NAME="XRSTAMP"
 
 INHERIT_COMCAST_BREAKPAD := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk-comcast', 'comcast-breakpad', '',d)}"
 
-inherit autotools pkgconfig rdkx-logger ${INHERIT_COMCAST_BREAKPAD}
+inherit autotools pkgconfig coverity rdkx-logger ${INHERIT_COMCAST_BREAKPAD}
 
 INCLUDE_DIRS = ""
 
 CFLAGS_append = " -std=c11 -fPIC -D_REENTRANT -D_POSIX_C_SOURCE=200809L -Wall -Werror -rdynamic ${INCLUDE_DIRS}"
 
-EXTRA_OECONF_append = " GIT_BRANCH=${RDK_GIT_BRANCH}"
+EXTRA_OECONF_append = " GIT_BRANCH=${CMF_GIT_BRANCH}"

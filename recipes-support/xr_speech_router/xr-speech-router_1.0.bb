@@ -10,7 +10,7 @@ PV = "1.0-git${SRCPV}"
 SRCREV_xr-speech-router = "${AUTOREV}"
 SRCREV_FORMAT           = "xr-speech-router"
 
-SRC_URI = "${RDK_GENERIC_ROOT_GIT}/xr-speech-router/generic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH};name=xr-speech-router"
+SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/xr-speech-router;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=xr-speech-router"
 
 S = "${WORKDIR}/git"
 
@@ -18,7 +18,7 @@ DEPENDS = "libbsd xraudio xr-mq xr-timer util-linux xr-sm-engine"
 
 INHERIT_COMCAST_BREAKPAD := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk-comcast', 'comcast-breakpad', '',d)}"
 
-inherit autotools pkgconfig vsdk-utils rdkx-logger ${INHERIT_COMCAST_BREAKPAD}
+inherit autotools pkgconfig coverity vsdk-utils rdkx-logger ${INHERIT_COMCAST_BREAKPAD}
 
 XLOG_MODULE_NAME="XRSR"
 
@@ -52,7 +52,7 @@ XRSR_CONFIG_XRAUDIO = "${PKG_CONFIG_SYSROOT_DIR}/usr/include/xraudio_config.json
 XRSR_CONFIG_OEM_ADD = "${S}/../xrsr_config_oem.add.json"
 XRSR_CONFIG_OEM_SUB = "${S}/../xrsr_config_oem.sub.json"
 
-EXTRA_OECONF_append = " GIT_BRANCH=${RDK_GIT_BRANCH} XRSR_CONFIG_JSON_XRAUDIO=${XRSR_CONFIG_XRAUDIO} XRSR_CONFIG_JSON_SUB=${XRSR_CONFIG_OEM_SUB} XRSR_CONFIG_JSON_ADD=${XRSR_CONFIG_OEM_ADD}"
+EXTRA_OECONF_append = " GIT_BRANCH=${CMF_GIT_BRANCH} XRSR_CONFIG_JSON_XRAUDIO=${XRSR_CONFIG_XRAUDIO} XRSR_CONFIG_JSON_SUB=${XRSR_CONFIG_OEM_SUB} XRSR_CONFIG_JSON_ADD=${XRSR_CONFIG_OEM_ADD}"
 
 addtask clean_oem_config before do_configure
 

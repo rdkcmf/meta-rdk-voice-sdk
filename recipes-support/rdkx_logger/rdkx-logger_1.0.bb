@@ -10,13 +10,13 @@ PV = "1.0-git${SRCPV}"
 SRCREV_rdkx-logger = "${AUTOREV}"
 SRCREV_FORMAT  = "rdkx-logger"
 
-SRC_URI = "${RDK_GENERIC_ROOT_GIT}/rdkx_logger/generic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH};name=rdkx-logger"
+SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/rdkx_logger;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=rdkx-logger"
 
 S = "${WORKDIR}/git"
 
 INHERIT_COMCAST_BREAKPAD := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk-comcast', 'comcast-breakpad', '',d)}"
 
-inherit autotools pkgconfig ${INHERIT_COMCAST_BREAKPAD}
+inherit autotools pkgconfig coverity ${INHERIT_COMCAST_BREAKPAD}
 
 FILES_${PN}_append = " ${includedir}/rdkx_logger.h"
 FILES_${PN}_append = " ${includedir}/rdkx_logger_modules.h"
@@ -53,4 +53,4 @@ do_disable_ansi_codes() {
 
 addtask disable_ansi_codes after do_patch before do_configure
 
-EXTRA_OECONF_append = " GIT_BRANCH=${RDK_GIT_BRANCH}"
+EXTRA_OECONF_append = " GIT_BRANCH=${CMF_GIT_BRANCH}"

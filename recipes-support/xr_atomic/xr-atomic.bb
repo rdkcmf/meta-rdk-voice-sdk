@@ -8,7 +8,7 @@ PV = "1.0+git${SRCPV}"
 
 SRCREV_xr-atomic = "${AUTOREV}"
 
-SRC_URI = "${RDK_GENERIC_ROOT_GIT}/xr_atomic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH};name=xr-atomic"
+SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/xr_atomic;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=xr-atomic"
 
 S = "${WORKDIR}/git"
 
@@ -18,10 +18,10 @@ XLOG_MODULE_NAME="XRATOMIC"
 
 INHERIT_COMCAST_BREAKPAD := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk-comcast', 'comcast-breakpad', '',d)}"
 
-inherit autotools pkgconfig rdkx-logger ${INHERIT_COMCAST_BREAKPAD}
+inherit autotools pkgconfig coverity rdkx-logger ${INHERIT_COMCAST_BREAKPAD}
 
 CXXFLAGS_append = " -std=c++11 -fPIC -D_REENTRANT -rdynamic -Wall -Werror "
 
 CFLAGS_append = " -std=c99 -Wall -Werror "
 
-EXTRA_OECONF_append = " GIT_BRANCH=${RDK_GIT_BRANCH}"
+EXTRA_OECONF_append = " GIT_BRANCH=${CMF_GIT_BRANCH}"

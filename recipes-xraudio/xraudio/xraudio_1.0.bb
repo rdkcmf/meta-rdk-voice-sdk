@@ -11,7 +11,7 @@ PV = "1.0-git${SRCPV}"
 SRCREV_xraudio = "${AUTOREV}"
 SRCREV_FORMAT  = "xraudio"
 
-SRC_URI = "${RDK_GENERIC_ROOT_GIT}/xraudio/generic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH};name=xraudio"
+SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/xraudio;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=xraudio"
 
 S = "${WORKDIR}/git"
 
@@ -32,7 +32,7 @@ DEPENDS_append = " ${@'xraudio-opus'  if (d.getVar('XRAUDIO_DECODE_OPUS',  expan
 
 INHERIT_COMCAST_BREAKPAD := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk-comcast', 'comcast-breakpad', '',d)}"
 
-inherit autotools pkgconfig vsdk-utils rdkx-logger ${INHERIT_COMCAST_BREAKPAD}
+inherit autotools pkgconfig coverity vsdk-utils rdkx-logger ${INHERIT_COMCAST_BREAKPAD}
 
 XLOG_MODULE_NAME="XRAUDIO"
 
@@ -86,7 +86,7 @@ EXTRA_OECONF_append = " XRAUDIO_CONFIG_JSON_PPR=${XRAUDIO_CONFIG_PPR}"
 EXTRA_OECONF_append = " XRAUDIO_CONFIG_JSON_SUB=${XRAUDIO_CONFIG_OEM_SUB}"
 EXTRA_OECONF_append = " XRAUDIO_CONFIG_JSON_ADD=${XRAUDIO_CONFIG_OEM_ADD}"
 
-EXTRA_OECONF_append = " GIT_BRANCH=${RDK_GIT_BRANCH}"
+EXTRA_OECONF_append = " GIT_BRANCH=${CMF_GIT_BRANCH}"
 
 addtask clean_oem_config before do_configure
 

@@ -10,7 +10,7 @@ PV = "1.0-git${SRCPV}"
 SRCREV_xr-speech-vrex = "${AUTOREV}"
 SRCREV_FORMAT         = "xr-speech-vrex"
 
-SRC_URI = "${RDK_GENERIC_ROOT_GIT}/xr-speech-vrex/generic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH};name=xr-speech-vrex"
+SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/xr-speech-vrex;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=xr-speech-vrex"
 
 S = "${WORKDIR}/git"
 
@@ -18,7 +18,7 @@ DEPENDS = "libbsd xr-speech-router jansson gperf-native"
 
 INHERIT_COMCAST_BREAKPAD := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk-comcast', 'comcast-breakpad', '',d)}"
 
-inherit autotools pkgconfig rdkx-logger ${INHERIT_COMCAST_BREAKPAD}
+inherit autotools pkgconfig coverity rdkx-logger ${INHERIT_COMCAST_BREAKPAD}
 
 XLOG_MODULE_NAME="XRSV"
 
@@ -33,4 +33,4 @@ LDFLAGS=" -lc -lbsd -ljansson"
 
 export STAGING_BINDIR_NATIVE
 
-EXTRA_OECONF_append = " GIT_BRANCH=${RDK_GIT_BRANCH}"
+EXTRA_OECONF_append = " GIT_BRANCH=${CMF_GIT_BRANCH}"

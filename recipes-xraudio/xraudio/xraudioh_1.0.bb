@@ -10,7 +10,7 @@ PV = "1.0-git${SRCPV}"
 SRCREV_xraudioh = "${AUTOREV}"
 SRCREV_FORMAT   = "xraudioh"
 
-SRC_URI = "${RDK_GENERIC_ROOT_GIT}/xraudio/generic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH};name=xraudioh"
+SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/xraudio;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=xraudioh"
 
 S = "${WORKDIR}/git"
 
