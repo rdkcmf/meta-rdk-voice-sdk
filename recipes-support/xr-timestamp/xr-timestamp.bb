@@ -18,9 +18,9 @@ FILES_${PN}_append = " ${includedir}/xr_timestamp.h"
 
 XLOG_MODULE_NAME="XRSTAMP"
 
-INHERIT_COMCAST_BREAKPAD := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk-comcast', 'comcast-breakpad', '',d)}"
+INHERIT_BREAKPAD_WRAPPER := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk', 'breakpad-wrapper', '',d)}"
 
-inherit autotools pkgconfig coverity rdkx-logger ${INHERIT_COMCAST_BREAKPAD}
+inherit autotools pkgconfig coverity rdkx-logger ${INHERIT_BREAKPAD_WRAPPER}
 
 INCLUDE_DIRS = ""
 

@@ -30,9 +30,9 @@ DEPENDS = "xraudioh xr-mq xr-timestamp xr-timer rdkversion libbsd ${XRAUDIO_KWD_
 DEPENDS_append = " ${@'xraudio-adpcm' if (d.getVar('XRAUDIO_DECODE_ADPCM', expand=False) == '1') else ''}"
 DEPENDS_append = " ${@'xraudio-opus'  if (d.getVar('XRAUDIO_DECODE_OPUS',  expand=False) == '1') else ''}"
 
-INHERIT_COMCAST_BREAKPAD := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk-comcast', 'comcast-breakpad', '',d)}"
+INHERIT_BREAKPAD_WRAPPER := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk', 'breakpad-wrapper', '',d)}"
 
-inherit autotools pkgconfig coverity vsdk-utils rdkx-logger ${INHERIT_COMCAST_BREAKPAD}
+inherit autotools pkgconfig coverity vsdk-utils rdkx-logger ${INHERIT_BREAKPAD_WRAPPER}
 
 XLOG_MODULE_NAME="XRAUDIO"
 

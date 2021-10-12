@@ -16,9 +16,9 @@ S = "${WORKDIR}/git"
 
 DEPENDS = "libbsd xraudio xr-mq xr-timer util-linux xr-sm-engine"
 
-INHERIT_COMCAST_BREAKPAD := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk-comcast', 'comcast-breakpad', '',d)}"
+INHERIT_BREAKPAD_WRAPPER := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk', 'breakpad-wrapper', '',d)}"
 
-inherit autotools pkgconfig coverity vsdk-utils rdkx-logger ${INHERIT_COMCAST_BREAKPAD}
+inherit autotools pkgconfig coverity vsdk-utils rdkx-logger ${INHERIT_BREAKPAD_WRAPPER}
 
 XLOG_MODULE_NAME="XRSR"
 

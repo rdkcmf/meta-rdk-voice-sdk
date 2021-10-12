@@ -14,9 +14,9 @@ SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/rdkx_logger;protocol=${CMF_GIT
 
 S = "${WORKDIR}/git"
 
-INHERIT_COMCAST_BREAKPAD := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk-comcast', 'comcast-breakpad', '',d)}"
+INHERIT_BREAKPAD_WRAPPER := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk', 'breakpad-wrapper', '',d)}"
 
-inherit autotools pkgconfig coverity ${INHERIT_COMCAST_BREAKPAD}
+inherit autotools pkgconfig coverity ${INHERIT_BREAKPAD_WRAPPER}
 
 FILES_${PN}_append = " ${includedir}/rdkx_logger.h"
 FILES_${PN}_append = " ${includedir}/rdkx_logger_modules.h"
