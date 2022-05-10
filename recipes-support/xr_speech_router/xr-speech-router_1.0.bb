@@ -14,7 +14,8 @@ SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/xr-speech-router;protocol=${CM
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "libbsd xraudio xr-mq xr-timer util-linux xr-sm-engine"
+DEPENDS = "libbsd xraudio xr-mq xr-timer util-linux xr-sm-engine safec-common-wrapper"
+DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
 INHERIT_BREAKPAD_WRAPPER := "${@bb.utils.contains('BBLAYERS', '${RDKROOT}/meta-rdk', 'breakpad-wrapper', '',d)}"
 
@@ -29,8 +30,11 @@ XRAUDIO_RESOURCE_MGMT ?= "1"
 CFLAGS_append = " -std=c11 -fPIC -D_REENTRANT -D_POSIX_C_SOURCE=200809L -D_GNU_SOURCE -Wall -Werror ${INCLUDE_DIRS} -rdynamic"
 
 CFLAGS_append = " ${@'-DXRAUDIO_RESOURCE_MGMT' if (d.getVar('XRAUDIO_RESOURCE_MGMT', expand=False) == '1') else ''}"
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '', d)}"
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
 
 LDFLAGS=" -lc -lbsd  -lpthread -lxraudio -lxr_mq -lxr-timer -lxrpSMEngine -lanl"
+LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
 
 # Set to "1" in recipe append to enable/disable HTTP or WS support
 ENABLE_HTTP_SUPPORT ?= "1"
