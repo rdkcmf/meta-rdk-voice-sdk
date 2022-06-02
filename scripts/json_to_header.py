@@ -127,12 +127,20 @@ def json_to_header_body(json_in, fh, prefix="", level=0, max_level=0, valid_keys
       elif isinstance(json_in[key], list) or isinstance(json_in[key], tuple):
          str_name  = '#define JSON_ARRAY_NAME_{}{}'.format(prefix, key.upper())
          fh.write('{: <82} \"{}\"\n'.format(str_name, key))
+         index = 0
          for value in json_in[key]:
-            if isinstance(value, str) or isinstance(value, unicode):
+            if isinstance(value, str):
                str_value = '#define JSON_ARRAY_VAL_STR_{}{}'.format(prefix, value.upper())
                fh.write('{: <82} \"{}\"\n'.format(str_value, value))
+            elif isinstance(value, bool):
+               str_value = '#define JSON_ARRAY_VAL_BOOL_{}{}_{}'.format(prefix, key.upper(), index)
+               fh.write('{: <82} ({})\n'.format(str_value, str(value).lower()))
+            elif isinstance(value, int):
+               str_value = '#define JSON_ARRAY_VAL_INT_{}{}_{}'.format(prefix, key.upper(), index)
+               fh.write('{: <82} ({})\n'.format(str_value, value))
             else:
                raise TypeError("unhandled array instance type <{}> key <{}>".format(type(json_in[key]), key))
+            index += 1
       else:
          raise TypeError("unhandled instance type <{}> key <{}>".format(type(json_in[key]), key))
 
