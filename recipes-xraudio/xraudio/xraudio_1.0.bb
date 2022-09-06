@@ -65,6 +65,7 @@ LDFLAGS_append = " ${@'-lxraudio-opus'  if (d.getVar('XRAUDIO_DECODE_OPUS',   ex
 LDFLAGS_append = " ${@'-lrt'            if (d.getVar('XRAUDIO_RESOURCE_MGMT', expand=False) == '1') else ''}"
 
 EXTRA_OECONF_append = "${@' --enable-resourcemgmt' if (d.getVar('XRAUDIO_RESOURCE_MGMT', expand=False) == '1') else ''}"
+EXTRA_OECONF_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ctrlm_mic_tap', ' --enable-mic_tap', '', d)}"
 
 XRAUDIO_CONFIG_HAL     = "${PKG_CONFIG_SYSROOT_DIR}/usr/include/xraudio_hal_config.json"
 XRAUDIO_CONFIG_KWD     = "${PKG_CONFIG_SYSROOT_DIR}/usr/include/xraudio_kwd_config.json"
